@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pro.sky.emlpoyee.model.Employee;
 import pro.sky.emlpoyee.service.EmployeeService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -29,5 +31,9 @@ public class EmployeeController {
     @GetMapping("/find")
     public Employee findEmployee(@RequestParam String firstName, @RequestParam String lastName) {
         return employeeService.findEmployee(firstName, lastName);
+    }
+    @GetMapping("/getAllEmployees")
+    public List<Employee> getAllEmployees() {
+        return employeeService.getEmployees();
     }
 }
