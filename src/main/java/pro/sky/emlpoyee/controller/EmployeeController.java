@@ -5,16 +5,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.emlpoyee.model.Employee;
-import pro.sky.emlpoyee.service.EmployeeService;
+import pro.sky.emlpoyee.service.EmployeeServiceImpl;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
-    private final EmployeeService employeeService;
+    private final EmployeeServiceImpl employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeServiceImpl employeeService) {
         this.employeeService = employeeService;
     }
 
