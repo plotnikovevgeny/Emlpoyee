@@ -5,22 +5,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.emlpoyee.model.Employee;
-import pro.sky.emlpoyee.service.EmployeeServiceImpl;
+import pro.sky.emlpoyee.service.EmployeeService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
-    private final EmployeeServiceImpl employeeService;
+    private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeServiceImpl employeeService) {
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
     @GetMapping("/add")
-    public Employee addEmployee(@RequestParam String firstName, @RequestParam String lastName) {
-        return employeeService.addEmployee(firstName, lastName);
+    public Employee addEmployee(@RequestParam String firstName,
+                                @RequestParam String lastName,
+                                @RequestParam Integer salary,
+                                @RequestParam Integer departmentId) {
+        return employeeService.addEmployee(firstName, lastName,salary,departmentId);
     }
 
     @GetMapping("/remove")

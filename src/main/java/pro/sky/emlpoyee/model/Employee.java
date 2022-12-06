@@ -1,20 +1,31 @@
 package pro.sky.emlpoyee.model;
 
-public class Employee {
-    private  String firstName;
-    private  String lastName;
+import java.util.Objects;
+import java.util.StringJoiner;
 
-    public Employee(String firstName, String lastName) {
+public class Employee {
+    private final String firstName;
+    private final String lastName;
+    private final int salary;
+    private final int department;
+
+    public Employee(String firstName, String lastName, Integer salary, Integer department) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.salary = salary;
+        this.department = department;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public int getDepartment() {
+        return department;
     }
 
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getFullName() {
@@ -25,16 +36,15 @@ public class Employee {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
+        return new StringJoiner(", ", Employee.class.getSimpleName() + "[", "]")
+                .add("firstName='" + firstName + "'")
+                .add("lastName='" + lastName + "'")
+                .add("salary=" + salary)
+                .add("department=" + department)
+                .toString();
     }
 
     @Override
@@ -44,14 +54,18 @@ public class Employee {
 
         Employee employee = (Employee) o;
 
-        if (!firstName.equals(employee.firstName)) return false;
-        return lastName.equals(employee.lastName);
+        if (salary != employee.salary) return false;
+        if (department != employee.department) return false;
+        if (!Objects.equals(firstName, employee.firstName)) return false;
+        return Objects.equals(lastName, employee.lastName);
     }
 
     @Override
     public int hashCode() {
-        int result = firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
+        int result = firstName != null ? firstName.hashCode() : 0;
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + salary;
+        result = 31 * result + department;
         return result;
     }
 }
